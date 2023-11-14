@@ -87,9 +87,7 @@ class Main {
       }
       throw new Error(`Creating failed with the status code ${status}.`);
     }
-    info(
-      `Storage zone successfully created. Here is the id: ${data.Id} and password: ${data.Password}`
-    );
+    info(`Storage zone successfully created. Here is the id: ${data.Id}`);
     setOutput("storageZoneName", data.Name);
     setOutput("storageZoneId", data.Id);
     setOutput("storageZonePassword", data.Password);

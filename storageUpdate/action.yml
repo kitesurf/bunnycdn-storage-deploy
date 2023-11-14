@@ -1,0 +1,30 @@
+name: "BunnyCDN create storage zone"
+description: "Github actions that can automate creating storage zones in BunnyCDN."
+
+inputs:
+  storageZoneId:
+    description: "The storage zone id"
+    type: string
+    required: true
+  replicationRegions:
+    description: "The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma."
+    type: string
+    default: "DE"
+    required: false
+  rewrite404To200:
+    description: "Rewrite 404 status code to 200 for URLs without extension"
+    type: boolean
+  custom404FilePath:
+    description: "The path to the custom file that will be returned in a case of 404"
+    type: string
+  accessKey:
+    description: "The API key."
+    required: true
+    type: string
+
+runs:
+  using: "node16"
+  main: "../dist/storage-update.js"
+branding:
+  icon: "upload-cloud"
+  color: "orange"

@@ -3,13 +3,14 @@
 
 This repo contains 4 actions:
 
-1. Storage-Deploy - Which is handy for uploading and removing previous files.
+1. Storage Deploy - Which is handy for uploading and removing previous files.
 2. Storage Create - Which can create a new Bunny storage.
-3. Pull Zone Update - Which can update a Bunny pull zone to fetch data from a different storage zone.
-4. Pull Zone Purge - Which can purge a Bunny pull zone.
-5. Storage Remove - Which can delete similiar named storage zones only keeping the latest x number of storage zones.
+3. Storage Update - Which can update a Bunny storage.
+4. Pull Zone Update - Which can update a Bunny pull zone to fetch data from a different storage zone.
+5. Pull Zone Purge - Which can purge a Bunny pull zone.
+6. Storage Remove - Which can delete similiar named storage zones only keeping the latest x number of storage zones.
 
-## 1. Storage-Deploy
+## 1. Storage Deploy
 
 This action performs 3 operations.
 * Uploads files and folders to storage.
@@ -81,7 +82,7 @@ This actions creates a new bunny storage zone. It also returns an output which c
 ```
 - name: Create storage in BunnyCDN
   id: createStorage
-  uses: ayeressian/bunnycdn-storage-deploy/createStorage@v2.1.1
+  uses: ayeressian/bunnycdn-storage-deploy/storageCreate@v2.1.1
   with:
     name: new-storage
     region: DE
@@ -92,7 +93,34 @@ This actions creates a new bunny storage zone. It also returns an output which c
 
 The output can be used in the next job using: ${{ steps.createStorage.outputs.storageZonePassword }}
 
-## 3. Pull Zone Update
+## 3. Storage Update
+
+This actions update a bunny storage zone.
+
+### Inputs
+
+| Name | Description |
+| --- | --- |
+| `storageZoneId` | The ID of the storage zone that should be updated |
+| `replicationRegions` | The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma. Take care not to include the region. |
+| `rewrite404To200` | Rewrite 404 status code to 200 for URLs without extension |
+| `custom404FilePath` | The path to the custom file that will be returned in a case of 404 |
+| `accessKey` | The API key. |
+
+### Example usage
+
+```
+- name: Update storage in BunnyCDN
+  uses: ayeressian/bunnycdn-storage-deploy/storageUpdate@v2.1.1
+  with:
+    storageZoneId: 123
+    replicationRegions: DE,LA
+    rewrite404To200: true
+    custom404FilePath: index.html
+    accessKey: "${{ secrets.STORAGE_KEY }}"
+```
+
+## 4. Pull Zone Update
 
 Github actions that can update an existing pull zone to use a different storage zone.
 
@@ -115,7 +143,7 @@ Github actions that can update an existing pull zone to use a different storage 
     accessKey: "${{ secrets.STORAGE_KEY }}"
 ```
 
-## 4. Pull Zone Purge
+## 5. Pull Zone Purge
 
 Github actions that can purge a Bunny pull zone.
 
@@ -136,7 +164,7 @@ Github actions that can purge a Bunny pull zone.
     accessKey: "${{ secrets.STORAGE_KEY }}"
 ```
 
-## 5. Storage Remove
+## 6. Storage Remove
 
 Github actions that can remove old storage zones using a `startsWith` filter. Useful when creating a new storage zone for each new release. 
 
@@ -155,7 +183,7 @@ Example: Having created 4 storage zones: `frontend-v1.0.0`, `frontend-v1.0.1`, `
 
 ```
 - name: Remove old storage zones
-  uses: ayeressian/bunnycdn-storage-deploy/removeOldStorageZones@v2.1.1
+  uses: ayeressian/bunnycdn-storage-deploy/storageRemove@v2.1.1
   with:
     startsWith: production-www-v
     keepLast: 3

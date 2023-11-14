@@ -1,4 +1,4 @@
-name: "BunnyCDN create storage zone"
+name: "BunnyCDN Create Storage Zone"
 description: "Github actions that can automate creating storage zones in BunnyCDN."
 
 inputs:
@@ -41,7 +41,7 @@ outputs:
 
 runs:
   using: "node16"
-  main: "../dist/create-storage.js"
+  main: "../dist/storage-create.js"
 branding:
   icon: "upload-cloud"
   color: "orange"

@@ -5,10 +5,11 @@ const { NODE_ENV = "production" } = process.env;
 module.exports = {
   entry: {
     index: "./src/index.ts",
-    "create-storage": "./src/create-storage.ts",
+    "storage-create": "./src/storage-create.ts",
+    "storage-update": "./src/storage-create.ts",
+    "storage-remove": "./src/storage-remove.ts",
     "pull-zone-change-storage": "./src/pull-zone-change-storage.ts",
     "run-purge": "./src/run-purge.ts",
-    "remove-old-storage-zones": "./src/remove-old-storage-zones.ts",
   },
   devtool: "source-map",
   mode: NODE_ENV,
