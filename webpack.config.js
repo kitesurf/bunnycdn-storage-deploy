@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     index: "./src/index.ts",
     "storage-create": "./src/storage-create.ts",
-    "storage-update": "./src/storage-create.ts",
+    "storage-update": "./src/storage-update.ts",
     "storage-remove": "./src/storage-remove.ts",
     "pull-zone-change-storage": "./src/pull-zone-change-storage.ts",
     "run-purge": "./src/run-purge.ts",
