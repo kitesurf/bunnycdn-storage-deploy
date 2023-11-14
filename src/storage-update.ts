@@ -1,10 +1,4 @@
-import {
-  getInput,
-  setOutput,
-  setFailed,
-  info,
-  getBooleanInput,
-} from "@actions/core";
+import { getInput, setFailed, info, getBooleanInput } from "@actions/core";
 import fetch from "node-fetch";
 
 type Params = {
@@ -24,7 +18,7 @@ class Main {
 
   async run() {
     try {
-      await this.createStorage();
+      await this.storageUpdate();
     } catch (error) {
       setFailed(error as string | Error);
     }
@@ -47,7 +41,7 @@ class Main {
     return result;
   }
 
-  private async createStorage() {
+  private async storageUpdate() {
     if (!this.params.storageZoneId) {
       throw new Error("Can't update, storageZoneId was not set.");
     }
@@ -55,6 +49,7 @@ class Main {
     info(`Update storage zone with the id ${this.params.storageZoneId}`);
 
     const url = `https://api.bunny.net/storagezone/${this.params.storageZoneId}`;
+
     const options = {
       method: "POST",
       headers: {
@@ -62,11 +57,15 @@ class Main {
         "content-type": "application/json",
         AccessKey: this.params.accessKey,
       },
-      body: JSON.stringify({
-        ReplicationRegions: this.params.replicationRegions || undefined,
-        Rewrite404To200: this.params.rewrite404To200,
-        Custom404FilePath: this.params.custom404FilePath || undefined,
-      }),
+      body: JSON.stringify(
+        Object.fromEntries(
+          Object.entries({
+            ReplicationRegions: this.params.replicationRegions || undefined,
+            Rewrite404To200: this.params.rewrite404To200,
+            Custom404FilePath: this.params.custom404FilePath || undefined,
+          }).filter(([_, v]) => v != null)
+        )
+      ),
     };
 
     const [status, data] = await fetch(url, options).then((res) =>

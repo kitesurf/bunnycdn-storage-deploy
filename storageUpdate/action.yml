@@ -1,5 +1,5 @@
-name: "BunnyCDN create storage zone"
-description: "Github actions that can automate creating storage zones in BunnyCDN."
+name: "BunnyCDN update storage zone"
+description: "Github actions that can automate updating storage zones in BunnyCDN."
 
 inputs:
   storageZoneId:
