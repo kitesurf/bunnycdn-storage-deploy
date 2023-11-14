@@ -42,7 +42,7 @@ Note that the nested directory will be automatically created by the CDN if it do
 
 ```
 - name: Deploy to BunnyCDN
-  uses: ayeressian/bunnycdn-storage-deploy@v2.2.0
+  uses: ChurchDesk/bunnycdn-storage-deploy@v1.0.0
   with:
     source: "dist"
     destination: "www"
@@ -82,7 +82,7 @@ This actions creates a new bunny storage zone. It also returns an output which c
 ```
 - name: Create storage in BunnyCDN
   id: createStorage
-  uses: ayeressian/bunnycdn-storage-deploy/storageCreate@v2.1.1
+  uses: ChurchDesk/bunnycdn-storage-deploy/storageCreate@1.0.0
   with:
     name: new-storage
     region: DE
@@ -111,7 +111,7 @@ This actions update a bunny storage zone.
 
 ```
 - name: Update storage in BunnyCDN
-  uses: ayeressian/bunnycdn-storage-deploy/storageUpdate@v2.1.1
+  uses: ChurchDesk/bunnycdn-storage-deploy/storageUpdate@1.0.0
   with:
     storageZoneId: 123
     replicationRegions: DE,LA
@@ -136,7 +136,7 @@ Github actions that can update an existing pull zone to use a different storage 
 
 ```
 - name: Update pull zone with a different storage zone
-  uses: ayeressian/bunnycdn-storage-deploy/pullZoneChangeStorage@v2.1.1
+  uses: ChurchDesk/bunnycdn-storage-deploy/pullZoneChangeStorage@1.0.0
   with:
     pullZoneId: "${{ secrets.ZONE_ID }}"
     storageZoneId: "${{ steps.createStorage.outputs.storageZoneId }}"
@@ -158,7 +158,7 @@ Github actions that can purge a Bunny pull zone.
 
 ```
 - name: Purge the pull zone 
-  uses: ayeressian/bunnycdn-storage-deploy/purge@v2.1.1
+  uses: ChurchDesk/bunnycdn-storage-deploy/purge@1.0.0
   with:
     pullZoneId: "${{ secrets.ZONE_ID }}"
     accessKey: "${{ secrets.STORAGE_KEY }}"
@@ -183,7 +183,7 @@ Example: Having created 4 storage zones: `frontend-v1.0.0`, `frontend-v1.0.1`, `
 
 ```
 - name: Remove old storage zones
-  uses: ayeressian/bunnycdn-storage-deploy/storageRemove@v2.1.1
+  uses: ChurchDesk/bunnycdn-storage-deploy/storageRemove@1.0.0
   with:
     startsWith: production-www-v
     keepLast: 3
