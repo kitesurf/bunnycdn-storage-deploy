@@ -9,7 +9,6 @@ inputs:
   replicationRegions:
     description: "The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma."
     type: string
-    default: "DE"
     required: false
   rewrite404To200:
     description: "Rewrite 404 status code to 200 for URLs without extension"
