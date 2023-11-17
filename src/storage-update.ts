@@ -72,14 +72,15 @@ class Main {
       ),
     };
 
-    const [status, data] = await fetch(url, options).then((res) =>
-      Promise.all([res.status, res.json() as Promise<unknown>])
-    );
-    if (status !== 204) {
-      if (status === 400) {
+    const response = await fetch(url, options);
+    if (response.status !== 204) {
+      if (response.status === 400) {
+        const data = await response.json();
         info(`Status 400: ${JSON.stringify(data)}`);
       }
-      throw new Error(`Updating failed with the status code ${status}.`);
+      throw new Error(
+        `Updating failed with the status code ${response.status}.`
+      );
     }
     info(`Storage zone successfully updated`);
   }
