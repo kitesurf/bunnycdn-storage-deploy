@@ -6,7 +6,7 @@ inputs:
     description: "The storage zone id"
     type: string
     required: true
-  replicationRegions:
+  replicationZones:
     description: "The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma."
     type: string
     required: false

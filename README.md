@@ -102,7 +102,7 @@ This actions update a bunny storage zone.
 | Name | Description |
 | --- | --- |
 | `storageZoneId` | The ID of the storage zone that should be updated |
-| `replicationRegions` | The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma. Take care not to include the region. |
+| `replicationZones` | The code of the main storage zone region (Possible values: DE, NY, LA, SG, SYD). Values should be separated by comma. Take care not to include the region. |
 | `rewrite404To200` | Rewrite 404 status code to 200 for URLs without extension |
 | `custom404FilePath` | The path to the custom file that will be returned in a case of 404 |
 | `accessKey` | The API key. |
@@ -114,7 +114,7 @@ This actions update a bunny storage zone.
   uses: ChurchDesk/bunnycdn-storage-deploy/storageUpdate@v1.0.1
   with:
     storageZoneId: 123
-    replicationRegions: DE,LA
+    replicationZones: NY,LA,SG
     rewrite404To200: true
     custom404FilePath: index.html
     accessKey: "${{ secrets.STORAGE_KEY }}"
