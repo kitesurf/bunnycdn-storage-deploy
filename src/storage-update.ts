@@ -50,6 +50,10 @@ class Main {
 
     const url = `https://api.bunny.net/storagezone/${this.params.storageZoneId}`;
 
+    info(`Replication zones: ${this.params.replicationZones}`);
+    info(`Rewrite 404 to 200: ${this.params.rewrite404To200 && "true"}`);
+    info(`Custom 404 file path: ${this.params.custom404FilePath}`);
+
     const options = {
       method: "POST",
       headers: {
@@ -61,7 +65,7 @@ class Main {
         Object.fromEntries(
           Object.entries({
             ReplicationZones: this.params.replicationZones || undefined,
-            Rewrite404To200: this.params.rewrite404To200,
+            Rewrite404To200: !!this.params.rewrite404To200,
             Custom404FilePath: this.params.custom404FilePath || undefined,
           }).filter(([_, v]) => v != null)
         )
