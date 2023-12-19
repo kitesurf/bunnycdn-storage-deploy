@@ -1,7 +1,7 @@
 # bunnycdn-storage-deploy
 
 
-This repo contains 4 actions:
+This repo contains 6 actions:
 
 1. Storage Deploy - Which is handy for uploading and removing previous files.
 2. Storage Create - Which can create a new Bunny storage.
